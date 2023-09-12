@@ -13,6 +13,8 @@ const app = express();
 //configurar CORS
 app.use(cors());
 
+//Lectura del Body
+app.use(express.json())
 
 //Database
 dbConnection();
@@ -23,13 +25,18 @@ console.log( process.env );
 // password -> U1po1Rgp1sCa1cwA
 
 //Rutas
-app.get('/', (req, res) => {
-
-    res.json({
-        ok: true,
-        msg: 'Hola mundo'
-    })
-})
+app.use('/api/usuarios', require('./routes/usuarios'))
+app.use('/api/login', require('./routes/auth'))
+//app.get('/api/usuarios', (req, res) => {
+//
+//    res.json({
+//        ok: true,
+//        usuarios: [{
+//            id: 123,
+//            nombre: 'asdf'
+//        }]
+//    })
+//})
 
 
 
